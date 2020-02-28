@@ -3,12 +3,17 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  hello_world_build:
 
     runs-on: ubuntu-latest
+    name: A job to say hello
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Hello world action step
+      id: hello
+      uses: actions/hello-world-docker-action@v1
+      with:
+        who-to-greet: 'Mona the Octocat'
 
-    - name: npm install
-      run: npm install
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
